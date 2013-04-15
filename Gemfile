@@ -25,11 +25,9 @@ gem 'sqlite3'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test, :development do
-  gem 'rspec-rails'
-end
-
+gem 'rspec-rails', group: [:test, :development]
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'guard-rspec'
 end
