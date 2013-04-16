@@ -8,7 +8,7 @@ describe Card do
   end
 
   it "is invalid if both reference and subject are missing" do
-    expect(Card.new(scripture: 'all have sinned')).to be_invalid
+    expect(Card.new(scripture: 'all have sinned')).to have(1).errors_on(:base)
   end
 
   context "card creation" do
