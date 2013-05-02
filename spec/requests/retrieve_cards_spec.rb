@@ -32,7 +32,7 @@ describe "RetrieveCards" do
 
     it "does not include the card created before Time.now" do
       response.body.should_not include(@card1.reference, @card1.scripture,
-                                   @card2.reference, @card2.scripture)
+                                       @card2.reference, @card2.scripture)
     end
 
     it "retrieves the cards created after Time.now" do

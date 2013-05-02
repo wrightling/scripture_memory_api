@@ -9,11 +9,19 @@ describe "AddCards" do
         scripture: 'For all have sinned...'
       }
     }
+
+    post cards_path, @request_payload
+  end
+
+  it "has a status code of 200" do
+    response.response_code.should eql 200
   end
 
   it "increases the number of cards" do
-    expect { post cards_path, @request_payload }.to change { Card.count }.by(1)
+    Card.count.should eql 1
   end
 
-  it "adds a valid card with expected values"
+  it "adds a valid card with expected values" do
+    Card.last.subject.should eql @request_payload[:card][:subject]
+  end
 end
