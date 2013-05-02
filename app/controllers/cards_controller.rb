@@ -10,4 +10,8 @@ class CardsController < ApplicationController
 
     render json: @cards
   end
+
+  def destroy
+    Card.delete(params["id"])
+  end
 end
