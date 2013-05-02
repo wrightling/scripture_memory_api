@@ -14,4 +14,6 @@ describe "AddCards" do
   it "increases the number of cards" do
     expect { post cards_path, @request_payload }.to change { Card.count }.by(1)
   end
+
+  it "adds a valid card with expected values"
 end
