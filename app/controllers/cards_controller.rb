@@ -4,4 +4,8 @@ class CardsController < ApplicationController
 
     render json: @cards
   end
+
+  def create
+    Card.create(params["card"])
+  end
 end

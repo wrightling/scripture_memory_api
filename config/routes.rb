@@ -1,5 +1,5 @@
 ScriptureMemoryApi::Application.routes.draw do
-  resources :cards, only: [:index]
+  resources :cards, only: [:index, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
