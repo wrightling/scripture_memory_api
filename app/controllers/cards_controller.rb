@@ -6,6 +6,8 @@ class CardsController < ApplicationController
   end
 
   def create
-    Card.create(params["card"])
+    @cards = Card.create(params["card"])
+
+    render json: @cards
   end
 end
