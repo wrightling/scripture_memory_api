@@ -4,8 +4,12 @@ class Card < ActiveRecord::Base
   validates :scripture, presence: true
   validate :at_least_one_subject_or_reference
 
-  def self.cards_updated_since(time)
-    Card.where("updated_at >= ?", time)
+  def self.updated_since(time)
+    if time
+      Card.where("updated_at >= ?", time)
+    else
+      Card.all
+    end
   end
 
   private

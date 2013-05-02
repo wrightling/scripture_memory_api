@@ -23,7 +23,7 @@ describe Card do
     it { should be_valid }
   end
 
-  describe "#cards_updated_since" do
+  describe "#updated_since" do
     before :each do
       @card1 = Card.create(reference: 'Rom 3:23', scripture: 'all have sinned')
       @card2 = Card.create(reference: 'Rom 6:23', scripture: 'the wages of sin...')
@@ -31,13 +31,17 @@ describe Card do
       @card3 = Card.create(reference: 'Rom 12:1', scripture: 'Therefore we urge..')
     end
 
-    it "should include the cards created after Time.now" do
-      Card.cards_updated_since(@last_updated).should include(@card3)
+    it "includes the cards created after Time.now" do
+      Card.updated_since(@last_updated).should include(@card3)
     end
 
-    it "should not include cards created before Time.now" do
-      Card.cards_updated_since(@last_updated).should_not include(@card1,
+    it "does not include cards created before Time.now" do
+      Card.updated_since(@last_updated).should_not include(@card1,
                                                                  @card2)
+    end
+
+    it "includes all cards if no date is provided" do
+      Card.updated_since(nil).should include(@card1, @card2, @card3)
     end
   end
 end

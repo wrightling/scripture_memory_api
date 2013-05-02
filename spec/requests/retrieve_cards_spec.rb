@@ -28,12 +28,12 @@ describe "RetrieveCards" do
       get cards_path, last_updated: last_updated
     end
 
-    it "retrieves the cards created before Time.now" do
+    it "does not include the card created before Time.now" do
       response.body.should include(@card1.reference, @card1.scripture,
                                    @card2.reference, @card2.scripture)
     end
 
-    it "does not include the card created after Time.now" do
+    it "retrieves the cards created after Time.now" do
       response.body.should_not include(@card3.reference, @card3.scripture)
     end
   end
