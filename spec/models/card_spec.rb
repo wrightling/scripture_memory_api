@@ -2,19 +2,16 @@ require 'spec_helper'
 
 describe Card do
   it "is invalid if scripture is missing" do
-    card = Card.new(reference: "John 3:16",
-                    subject: "God's Love")
+    card = FactoryGirl.build(:card, scripture: nil)
     expect(card).to have(1).errors_on(:scripture)
   end
 
   it "is invalid if both reference and subject are missing" do
-    expect(Card.new(scripture: 'all have sinned')).to have(1).errors_on(:base)
+    expect(FactoryGirl.build(:card, reference: nil, subject: nil)).to have(1).errors_on(:base)
   end
 
   context "card creation" do
-    subject(:card) { Card.new(reference: "John 3:16",
-                              scripture: "For God so loved..",
-                              subject: "God's Love") }
+    subject(:card) { FactoryGirl.build(:card) }
 
     it "changes the number of cards" do
       expect { card.save }.to change { Card.count }.by(1)
@@ -25,10 +22,10 @@ describe Card do
 
   describe "#updated_since" do
     before :each do
-      @card1 = Card.create(reference: 'Rom 3:23', scripture: 'all have sinned')
-      @card2 = Card.create(reference: 'Rom 6:23', scripture: 'the wages of sin...')
-      @last_updated = Time.now
-      @card3 = Card.create(reference: 'Rom 12:1', scripture: 'Therefore we urge..')
+      @card1 = FactoryGirl.create(:card)
+      @card2 = FactoryGirl.create(:card)
+      @last_updated = Time.now.utc
+      @card3 = FactoryGirl.create(:card)
     end
 
     it "includes the cards created after Time.now" do
@@ -37,7 +34,7 @@ describe Card do
 
     it "does not include cards created before Time.now" do
       Card.updated_since(@last_updated).should_not include(@card1,
-                                                                 @card2)
+                                                           @card2)
     end
 
     it "includes all cards if no date is provided" do
