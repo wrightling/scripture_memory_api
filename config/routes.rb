@@ -1,5 +1,9 @@
 ScriptureMemoryApi::Application.routes.draw do
-  resources :cards, only: [:index, :create, :destroy]
+  namespace :api do
+    namespace :v1 do
+      resources :cards, only: [:index, :create, :destroy]
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

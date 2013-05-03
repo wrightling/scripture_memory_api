@@ -10,7 +10,7 @@ describe "AddCards" do
       }
     }
 
-    post cards_path, @request_payload
+    post '/api/v1/cards', @request_payload
   end
 
   it "has a status code of 200" do

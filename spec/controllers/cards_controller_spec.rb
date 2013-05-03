@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe CardsController do
+describe Api::V1::CardsController do
 
 end

@@ -6,7 +6,7 @@ describe "DeleteCards" do
     @card2 = FactoryGirl.create(:card)
     @card3 = FactoryGirl.create(:card)
 
-    delete card_path(@card2)
+    delete "/api/v1/cards/#{@card2.id}"
   end
 
   it "has a status code of 200" do
