@@ -10,7 +10,8 @@ describe "AddCards" do
       }
     }
 
-    post '/api/v1/cards', @request_payload
+    post '/api/cards', @request_payload,
+      {'HTTP_ACCEPT' => 'application/smapi.v1'}
   end
 
   it "has a status code of 200" do

@@ -16,6 +16,10 @@ module Api
       def destroy
         Card.delete(params["id"])
       end
+
+      def update
+        Card.find(params["id"]).update_attributes(params["card"])
+      end
     end
   end
 end

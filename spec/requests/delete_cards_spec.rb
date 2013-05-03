@@ -6,7 +6,8 @@ describe "DeleteCards" do
     @card2 = FactoryGirl.create(:card)
     @card3 = FactoryGirl.create(:card)
 
-    delete "/api/v1/cards/#{@card2.id}"
+    delete "/api/cards/#{@card2.id}", nil,
+      {'HTTP_ACCEPT' => 'application/smapi.v1'}
   end
 
   it "has a status code of 200" do

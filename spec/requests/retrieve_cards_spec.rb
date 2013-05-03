@@ -5,7 +5,7 @@ describe "RetrieveCards" do
     before :each do
       @card1 = FactoryGirl.create(:card)
       @card2 = FactoryGirl.create(:card)
-      get '/api/v1/cards'
+      get '/api/cards', nil, {'HTTP_ACCEPT' => 'application/smapi.v1'}
     end
 
     it "has a status code of 200" do
@@ -27,7 +27,9 @@ describe "RetrieveCards" do
       last_updated = Time.now.utc
       @card3 = FactoryGirl.create(:card)
 
-      get '/api/v1/cards', last_updated: last_updated
+      get '/api/cards',
+        {last_updated: last_updated},
+        {'HTTP_ACCEPT' => 'application/smapi.v1'}
     end
 
     it "does not include the card created before Time.now" do
