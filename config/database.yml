@@ -5,6 +5,7 @@ development:
   pool: 5
   username: warren
   password:
+  min_messages: WARNING
 
 test:
   adapter: postgresql
@@ -13,6 +14,7 @@ test:
   pool: 5
   username: warren
   password:
+  min_messages: WARNING
 
 production:
   adapter: postgresql
