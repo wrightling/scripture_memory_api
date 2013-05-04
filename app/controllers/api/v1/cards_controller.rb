@@ -10,9 +10,14 @@ module Api
       end
 
       def create
-        @cards = Card.create(params["card"])
+        @card = Card.new(params["card"])
 
-        render json: @cards, status: 201
+        if @card.save
+          render json: @card, status: :created
+        else
+          errors = { errors: @card.errors.full_messages }
+          render json: errors, status: :unprocessable_entity
+        end
       end
 
       def destroy
