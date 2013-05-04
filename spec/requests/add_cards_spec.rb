@@ -14,8 +14,8 @@ describe "AddCards" do
       {'HTTP_ACCEPT' => 'application/smapi.v1'}
   end
 
-  it "has a status code of 200" do
-    response.response_code.should eql 200
+  it "has a status code of 201" do
+    response.response_code.should eql 201
   end
 
   it "increases the number of cards" do

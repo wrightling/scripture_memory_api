@@ -12,7 +12,7 @@ module Api
       def create
         @cards = Card.create(params["card"])
 
-        render json: @cards
+        render json: @cards, status: 201
       end
 
       def destroy
