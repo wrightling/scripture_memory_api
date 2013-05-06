@@ -28,7 +28,16 @@ describe "AddCategories" do
   end
 
   context "without a name specified" do
-    it "has a status code of 422"
-    it "returns an appropriate error message"
+    let(:request_payload) do
+      { category: {} }
+    end
+
+    it "has a status code of 422" do
+      response.response_code.should eql 422
+    end
+
+    it "returns an appropriate error message" do
+      response.body.should include "Name can't be blank" 
+    end
   end
 end

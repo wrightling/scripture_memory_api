@@ -13,7 +13,8 @@ module Api
         if @category.save
           render json: @category, status: :created
         else
-          render json: @category.errors, status: :unprocessable_entity
+          errors = { errors: @category.errors.full_messages }
+          render json: errors, status: :unprocessable_entity
         end
       end
 
