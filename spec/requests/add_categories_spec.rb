@@ -1,7 +1,34 @@
 require 'spec_helper'
 
 describe "AddCategories" do
-  it "has a status code of 201"
-  it "increases the number of categories"
-  it "adds a valid category with expected values"
+  before :each do
+    post '/api/categories', request_payload,
+      {'HTTP_ACCEPT' => 'application/smapi.v1'}
+  end
+
+  context "with a valid category" do
+    let(:request_payload) do
+      { category: {
+          name: 'romans road'
+        }
+      }
+    end
+
+    it "has a status code of 201" do
+      response.response_code.should eql 201
+    end
+
+    it "increases the number of categories" do
+      Category.count.should eql 1
+    end
+
+    it "adds a valid category with expected values" do
+      Category.last.name.should eql request_payload[:category][:name]
+    end
+  end
+
+  context "without a name specified" do
+    it "has a status code of 422"
+    it "returns an appropriate error message"
+  end
 end
