@@ -19,7 +19,25 @@ describe "RetrieveCategories" do
   end
 
   context "with a date specified" do
-    it "does not include the category created before Time.now"
-    it "retrieves the categories created after Time.now"
+    before :each do
+      without_timestamping_of(Category) do
+        @category1 = FactoryGirl.create(:old_category)
+        @category2 = FactoryGirl.create(:old_category)
+      end
+      last_updated = Time.now.utc
+      @category3 = FactoryGirl.create(:category)
+
+      get '/api/categories',
+        {last_updated: last_updated},
+        {'HTTP_ACCEPT' => 'application/smapi.v1'}
+    end
+
+    it "does not include the category created before Time.now" do
+      response.body.should_not include(@category1.name, @category2.name)
+    end
+
+    it "retrieves the categories created after Time.now" do
+      response.body.should include(@category3.name)
+    end
   end
 end

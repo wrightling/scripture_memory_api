@@ -2,7 +2,7 @@ module Api
   module V1
     class CategoriesController < ApplicationController
       def index
-        @categories = Category.all
+        @categories = Category.updated_since(params[:last_updated])
 
         render json: @categories
       end
