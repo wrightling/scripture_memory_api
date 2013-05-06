@@ -35,6 +35,9 @@ module Api
 
       def find_category
         @category = Category.find(params["id"])
+      rescue
+        error = { error: 'The category you were looking for could not be found' }
+        render json: error, status: 404
       end
     end
   end
