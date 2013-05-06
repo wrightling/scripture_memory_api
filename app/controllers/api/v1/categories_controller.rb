@@ -1,6 +1,8 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
+      before_filter :find_category, only: [:update]
+
       def index
         @categories = Category.updated_since(params[:last_updated])
 
@@ -18,15 +20,9 @@ module Api
         end
       end
 
-      # def update
-      #   @category = Category.find(params[:id])
-
-      #   if @category.update_attributes(params[:category])
-      #     head :no_content
-      #   else
-      #     render json: @category.errors, status: :unprocessable_entity
-      #   end
-      # end
+      def update
+        @category.update_attributes(params["category"])
+      end
 
       # def destroy
       #   @category = Category.find(params[:id])
@@ -34,6 +30,12 @@ module Api
 
       #   head :no_content
       # end
+
+      private
+
+      def find_category
+        @category = Category.find(params["id"])
+      end
     end
   end
 end
