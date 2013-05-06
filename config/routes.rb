@@ -5,7 +5,7 @@ ScriptureMemoryApi::Application.routes.draw do
   namespace :api do
     scope module: :v1, constraints: ApiConstraints.new(version: 1) do
       resources :cards, only: [:index, :create, :destroy, :update]
-      resources :categories, only: [:create]
+      resources :categories, only: [:index, :create]
     end
   end
 
