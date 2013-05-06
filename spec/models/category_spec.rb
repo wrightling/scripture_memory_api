@@ -7,13 +7,34 @@ describe Category do
   end
 
   context "category creation" do
-    it "changes the number of categories"
-    it "should be valid"
+    subject(:category) { FactoryGirl.build(:category) }
+
+    it "changes the number of categories" do
+      expect { category.save }.to change { Category.count }.by(1)
+    end
+
+    it { should be_valid }
   end
 
   describe "#updated_since" do
-    it "includes all categories if no date is provided"
-    it "includes the categories created after Time.now"
-    it "does not include cards created before Time.now"
+    before :each do
+      @category1 = FactoryGirl.create(:category)
+      @category2 = FactoryGirl.create(:category)
+      @last_updated = Time.now.utc
+      @category3 = FactoryGirl.create(:category)
+    end
+
+    it "includes all categories if no date is provided" do
+      Category.updated_since(@last_updated).should include(@category3)
+    end
+
+    it "includes the categories created after Time.now" do
+      Category.updated_since(@last_updated).should_not include(@category1,
+                                                               @category2)
+    end
+
+    it "does not include cards created before Time.now" do
+      Category.updated_since(nil).should include(@category1, @category2, @category3)
+    end
   end
 end
