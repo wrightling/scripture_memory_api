@@ -1,7 +1,7 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
-      before_filter :find_category, only: [:update]
+      before_filter :find_category, only: [:update, :destroy]
 
       def index
         @categories = Category.updated_since(params[:last_updated])
@@ -24,12 +24,9 @@ module Api
         @category.update_attributes(params["category"])
       end
 
-      # def destroy
-      #   @category = Category.find(params[:id])
-      #   @category.destroy
-
-      #   head :no_content
-      # end
+      def destroy
+        @category.destroy
+      end
 
       private
 
