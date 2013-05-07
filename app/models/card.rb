@@ -1,6 +1,9 @@
 class Card < ActiveRecord::Base
   attr_accessible :reference, :scripture, :subject
 
+  has_many :categorizations
+  has_many :categories, through: :categorizations
+
   validates :scripture, presence: true
   validate :at_least_one_subject_or_reference
 

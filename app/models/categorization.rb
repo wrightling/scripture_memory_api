@@ -1,6 +1,9 @@
 class Categorization < ActiveRecord::Base
   attr_accessible :card_id, :category_id
 
+  belongs_to :card
+  belongs_to :category
+
   validates :card_id, presence: true
   validates :category_id, presence: true
 

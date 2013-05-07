@@ -1,6 +1,9 @@
 class Category < ActiveRecord::Base
   attr_accessible :name
 
+  has_many :categorizations
+  has_many :cards, through: :categorizations
+
   validates :name, presence: true
 
   def self.updated_since(time)
