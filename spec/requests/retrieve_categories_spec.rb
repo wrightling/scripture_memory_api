@@ -13,8 +13,7 @@ describe "RetrieveCategories" do
     end
 
     it "retrieves all categories" do
-      response.body.should include(@category1.name,
-                                   @category2.name)
+      response.body.should eql Category.all.to_json
     end
   end
 
@@ -24,20 +23,16 @@ describe "RetrieveCategories" do
         @category1 = FactoryGirl.create(:old_category)
         @category2 = FactoryGirl.create(:old_category)
       end
-      last_updated = Time.now.utc
+      @last_updated = Time.now.utc
       @category3 = FactoryGirl.create(:category)
 
       get '/api/categories',
-        {last_updated: last_updated},
+        {last_updated: @last_updated},
         {'HTTP_ACCEPT' => 'application/smapi.v1'}
     end
 
-    it "does not include the category created before Time.now" do
-      response.body.should_not include(@category1.name, @category2.name)
-    end
-
     it "retrieves the categories created after Time.now" do
-      response.body.should include(@category3.name)
+      response.body.should eql Category.updated_since(@last_updated).to_json
     end
   end
 end
