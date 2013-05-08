@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "DeleteCategories" do
   context "without errors" do
     before :each do
-      @category1 = FactoryGirl.create(:category)
-      @category2 = FactoryGirl.create(:category)
-      @category3 = FactoryGirl.create(:category)
+      @category1 = create(:category)
+      @category2 = create(:category)
+      @category3 = create(:category)
     end
 
     let(:delete_category) do

@@ -2,16 +2,15 @@ require 'spec_helper'
 
 describe Card do
   it "is invalid if scripture is missing" do
-    card = FactoryGirl.build(:card, scripture: nil)
-    expect(card).to have(1).errors_on(:scripture)
+    expect(build(:card, scripture: nil)).to have(1).errors_on(:scripture)
   end
 
   it "is invalid if both reference and subject are missing" do
-    expect(FactoryGirl.build(:card, reference: nil, subject: nil)).to have(1).errors_on(:handle)
+    expect(build(:card, reference: nil, subject: nil)).to have(1).errors_on(:handle)
   end
 
   context "card creation" do
-    subject(:card) { FactoryGirl.build(:card) }
+    subject(:card) { build(:card) }
 
     it "changes the number of cards" do
       expect { card.save }.to change { Card.count }.by(1)
@@ -22,10 +21,10 @@ describe Card do
 
   describe "#updated_since" do
     before :each do
-      @card1 = FactoryGirl.create(:card)
-      @card2 = FactoryGirl.create(:card)
+      @card1 = create(:card)
+      @card2 = create(:card)
       @last_updated = Time.now.utc
-      @card3 = FactoryGirl.create(:card)
+      @card3 = create(:card)
     end
 
     it "includes the cards created after Time.now" do

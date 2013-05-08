@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "RetrieveCategories" do
   context "with no date specified" do
     before :each do
-      @category1 = FactoryGirl.create(:category)
-      @category2 = FactoryGirl.create(:category)
+      @category1 = create(:category)
+      @category2 = create(:category)
       get '/api/categories', nil, {'HTTP_ACCEPT' => 'application/smapi.v1'}
     end
 
@@ -20,11 +20,11 @@ describe "RetrieveCategories" do
   context "with a date specified" do
     before :each do
       without_timestamping_of(Category) do
-        @category1 = FactoryGirl.create(:old_category)
-        @category2 = FactoryGirl.create(:old_category)
+        @category1 = create(:old_category)
+        @category2 = create(:old_category)
       end
       @last_updated = Time.now.utc
-      @category3 = FactoryGirl.create(:category)
+      @category3 = create(:category)
 
       get '/api/categories',
         {last_updated: @last_updated},

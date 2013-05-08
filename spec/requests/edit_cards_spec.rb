@@ -11,7 +11,7 @@ describe "EditCards" do
 
   context "without errors" do
     before :each do
-      @card1 = FactoryGirl.create(:card)
+      @card1 = create(:card)
     end
 
     let(:edit_reference) { put "/api/cards/#{@card1.id}",

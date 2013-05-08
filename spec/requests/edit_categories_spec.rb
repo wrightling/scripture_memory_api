@@ -11,7 +11,7 @@ describe "EditCategories" do
 
   context "without errors" do
     before :each do
-      @category1 = FactoryGirl.create(:category)
+      @category1 = create(:category)
     end
 
     let(:edit_category) { put "/api/categories/#{@category1.id}",

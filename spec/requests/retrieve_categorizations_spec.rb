@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "RetrieveCategorizations" do
   context "with no date specified" do
     before :each do
-      @cat1 = FactoryGirl.create(:categorization)
-      @cat2 = FactoryGirl.create(:categorization)
+      @cat1 = create(:categorization)
+      @cat2 = create(:categorization)
       get '/api/categorizations', nil,
         {'HTTP_ACCEPT' => 'application/smapi.v1'}
     end
@@ -21,11 +21,11 @@ describe "RetrieveCategorizations" do
   context "with a date specified" do
     before :each do
       without_timestamping_of(Categorization) do
-        @cat1 = FactoryGirl.create(:old_categorization)
-        @cat2 = FactoryGirl.create(:old_categorization)
+        @cat1 = create(:old_categorization)
+        @cat2 = create(:old_categorization)
       end
       @last_updated = Time.now.utc
-      @cat3 = FactoryGirl.create(:categorization)
+      @cat3 = create(:categorization)
 
       get '/api/categorizations',
         {last_updated: @last_updated},

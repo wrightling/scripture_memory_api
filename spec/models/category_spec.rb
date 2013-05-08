@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Category do
   it "is invalid if name is missing" do
-    category = FactoryGirl.build(:category, name: nil)
+    category = build(:category, name: nil)
     expect(category).to have(1).errors_on(:name)
   end
 
   context "category creation" do
-    subject(:category) { FactoryGirl.build(:category) }
+    subject(:category) { build(:category) }
 
     it "changes the number of categories" do
       expect { category.save }.to change { Category.count }.by(1)
@@ -18,10 +18,10 @@ describe Category do
 
   describe "#updated_since" do
     before :each do
-      @category1 = FactoryGirl.create(:category)
-      @category2 = FactoryGirl.create(:category)
+      @category1 = create(:category)
+      @category2 = create(:category)
       @last_updated = Time.now.utc
-      @category3 = FactoryGirl.create(:category)
+      @category3 = create(:category)
     end
 
     it "includes all categories if no date is provided" do

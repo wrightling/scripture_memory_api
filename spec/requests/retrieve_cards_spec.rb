@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "RetrieveCards" do
   context "with no date specified" do
     before :each do
-      @card1 = FactoryGirl.create(:card)
-      @card2 = FactoryGirl.create(:card)
+      @card1 = create(:card)
+      @card2 = create(:card)
       get '/api/cards', nil, {'HTTP_ACCEPT' => 'application/smapi.v1'}
     end
 
@@ -20,11 +20,11 @@ describe "RetrieveCards" do
   context "with a date specified" do
     before :each do
       without_timestamping_of(Card) do
-        @card1 = FactoryGirl.create(:old_card)
-        @card2 = FactoryGirl.create(:old_card)
+        @card1 = create(:old_card)
+        @card2 = create(:old_card)
       end
       @last_updated = Time.now.utc
-      @card3 = FactoryGirl.create(:card)
+      @card3 = create(:card)
 
       get '/api/cards',
         {last_updated: @last_updated},

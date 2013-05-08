@@ -13,6 +13,7 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
   config.use_transactional_fixtures = true
+  config.include FactoryGirl::Syntax::Methods
 end
 
 def without_timestamping_of(*klasses)

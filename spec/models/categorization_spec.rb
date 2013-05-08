@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Categorization do
   it "is invalid if card_id is missing" do
-    categorization = FactoryGirl.build(:categorization, card_id: nil, category_id: 1)
+    categorization = build(:categorization, card_id: nil, category_id: 1)
     expect(categorization).to have(1).errors_on(:card_id)
   end
 
   it "is invalid if category_id is missing" do
-    categorization = FactoryGirl.build(:categorization, card_id: 1, category_id: nil)
+    categorization = build(:categorization, card_id: 1, category_id: nil)
     expect(categorization).to have(1).errors_on(:category_id)
   end
 
@@ -17,10 +17,10 @@ describe Categorization do
 
   describe "#updated_since" do
     before :each do
-      @cat1 = FactoryGirl.create(:categorization)
-      @cat2 = FactoryGirl.create(:categorization)
+      @cat1 = create(:categorization)
+      @cat2 = create(:categorization)
       @last_updated = Time.now.utc
-      @cat3 = FactoryGirl.create(:categorization)
+      @cat3 = create(:categorization)
     end
 
     it "includes the categorizations created after Time.now" do

@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "DeleteCards" do
   context "without errors" do
     before :each do
-      @card1 = FactoryGirl.create(:card)
-      @card2 = FactoryGirl.create(:card)
-      @card3 = FactoryGirl.create(:card)
+      @card1 = create(:card)
+      @card2 = create(:card)
+      @card3 = create(:card)
 
       delete "/api/cards/#{@card2.id}", nil,
         {'HTTP_ACCEPT' => 'application/smapi.v1'}
