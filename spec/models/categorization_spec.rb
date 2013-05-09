@@ -2,18 +2,24 @@ require 'spec_helper'
 
 describe Categorization do
   it "is invalid if card_id is missing" do
-    categorization = build(:categorization, card_id: nil, category_id: 1)
+    categorization = build(:categorization, card_id: nil)
     expect(categorization).to have(1).errors_on(:card_id)
   end
 
   it "is invalid if category_id is missing" do
-    categorization = build(:categorization, card_id: 1, category_id: nil)
+    categorization = build(:categorization, category_id: nil)
     expect(categorization).to have(1).errors_on(:category_id)
   end
 
-  it "is invalid if card_id does not correlate to an existing card"
+  it "is invalid if card_id does not correlate to an existing card" do
+    categorization = build(:categorization, card_id: 1)
+    expect(categorization).to have(1).errors_on(:card_id)
+  end
 
-  it "is invalid if category_id does not correlate to an existing category"
+  it "is invalid if category_id does not correlate to an existing category" do
+    categorization = build(:categorization, category_id: 1)
+    expect(categorization).to have(1).errors_on(:category_id)
+  end
 
   describe "#updated_since" do
     before :each do

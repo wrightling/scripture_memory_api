@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :categorization do
-    sequence(:card_id) { |i| i }
-    sequence(:category_id) { |i| i }
+    sequence(:card_id) { create(:card).id }
+    sequence(:category_id) { create(:category).id }
 
     factory :old_categorization do
       time = 1.week.ago
