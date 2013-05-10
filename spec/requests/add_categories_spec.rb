@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "AddCategories" do
+  before :all do
+    @options = {scope: CategorySerializer, root: "categories"}
+  end
+
   before :each do
     post '/api/categories', request_payload,
       {'HTTP_ACCEPT' => 'application/smapi.v1'}
@@ -24,6 +28,12 @@ describe "AddCategories" do
 
     it "adds a valid category with expected values" do
       Category.last.name.should eql request_payload[:category][:name]
+    end
+
+    it "returns json containing the category" do
+      category = Category.last
+      json = category.active_model_serializer.new(category, @options).to_json
+      expect(response.body).to eql json
     end
   end
 

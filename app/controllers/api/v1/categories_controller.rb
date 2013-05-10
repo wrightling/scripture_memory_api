@@ -13,7 +13,7 @@ module Api
         @category = Category.new(params["category"])
 
         if @category.save
-          render json: @category, status: :created
+          render json: @category, root: "categories", status: :created
         else
           errors = { errors: @category.errors.full_messages }
           render json: errors, status: :unprocessable_entity

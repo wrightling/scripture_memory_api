@@ -13,7 +13,7 @@ module Api
         @card = Card.new(params["card"])
 
         if @card.save
-          render json: @card, status: :created
+          render json: @card, root: "cards", status: :created
         else
           errors = { errors: @card.errors.full_messages }
           render json: errors, status: :unprocessable_entity

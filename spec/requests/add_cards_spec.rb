@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "AddCards" do
+  before :all do
+    @options = {scope: CardSerializer, root: "cards"}
+  end
+
   before :each do
     post '/api/cards', request_payload,
       {'HTTP_ACCEPT' => 'application/smapi.v1'}
@@ -26,6 +30,12 @@ describe "AddCards" do
 
     it "has expected values" do
       Card.last.subject.should eql request_payload[:card][:subject]
+    end
+
+    it "returns json containing the card" do
+      card = Card.last
+      json = card.active_model_serializer.new(card, @options).to_json
+      expect(response.body).to eql json
     end
   end
 
