@@ -22,6 +22,7 @@ EDIT
 ### category requests
 
 INDEX
+
     curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categories"
     curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categories?last_updated=2013-05-07"
 
