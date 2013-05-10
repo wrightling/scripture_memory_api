@@ -5,6 +5,7 @@
 INDEX
 
     curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/cards"
+    curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/cards?last_updated=2013-05-05"
 
 CREATE
 
@@ -21,8 +22,8 @@ EDIT
 ### category requests
 
 INDEX
-
     curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categories"
+    curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categories?last_updated=2013-05-07"
 
 CREATE
 
@@ -41,3 +42,4 @@ EDIT
 INDEX
 
     curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categorizations"
+    curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categorizations?last_updated=2013-05-07"
