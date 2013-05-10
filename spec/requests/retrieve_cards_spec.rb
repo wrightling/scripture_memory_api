@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe "RetrieveCards" do
+  before :all do
+    @options = {scope: CardSerializer, root: "cards"}
+  end
+
   context "with no date specified" do
     before :each do
-      @card1 = create(:card)
-      @card2 = create(:card)
+      @cards = [create(:card), create(:card)]
       get '/api/cards', nil, {'HTTP_ACCEPT' => 'application/smapi.v1'}
     end
 
@@ -13,7 +16,8 @@ describe "RetrieveCards" do
     end
 
     it "retrieves all cards" do
-      response.body.should eql Card.all.to_json
+      json = @cards.active_model_serializer.new(@cards, @options).to_json
+      response.body.should eql json
     end
   end
 
@@ -32,7 +36,9 @@ describe "RetrieveCards" do
     end
 
     it "retrieves the cards created after Time.now" do
-      response.body.should eql Card.updated_since(@last_updated).to_json
+      cards = [@card3]
+      json = cards.active_model_serializer.new(cards, @options).to_json
+      response.body.should eql json
     end
   end
 end

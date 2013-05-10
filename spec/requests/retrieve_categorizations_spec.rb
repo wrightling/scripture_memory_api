@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe "RetrieveCategorizations" do
+  before :all do
+    @options = {scope: CategorizationSerializer, root: "categorizations"}
+  end
+
   context "with no date specified" do
     before :each do
-      @cat1 = create(:categorization)
-      @cat2 = create(:categorization)
+      @cats = [create(:categorization), create(:categorization)]
       get '/api/categorizations', nil,
         {'HTTP_ACCEPT' => 'application/smapi.v1'}
     end
@@ -14,7 +17,8 @@ describe "RetrieveCategorizations" do
     end
 
     it "retrieves all categorizations" do
-      response.body.should eql Categorization.all.to_json
+      json = @cats.active_model_serializer.new(@cats, @options).to_json
+      response.body.should eql json
     end
   end
 
@@ -33,7 +37,9 @@ describe "RetrieveCategorizations" do
     end
 
     it "includes the categorizations created after Time.now" do
-      response.body.should eql Categorization.updated_since(@last_updated).to_json
+      cats = [@cat3]
+      json = cats.active_model_serializer.new(cats, @options).to_json
+      response.body.should eql json
     end
   end
 end
