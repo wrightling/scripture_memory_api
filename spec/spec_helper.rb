@@ -27,3 +27,7 @@ def without_timestamping_of(*klasses)
     end
   end
 end
+
+def version(version_num)
+  {'HTTP_ACCEPT' => "application/smapi.v#{version_num}+json"}
+end

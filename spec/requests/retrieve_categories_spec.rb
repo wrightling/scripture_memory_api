@@ -8,7 +8,7 @@ describe "RetrieveCategories" do
   context "with no date specified" do
     before :each do
       @categories = [create(:category), create(:category)]
-      get '/api/categories', nil, {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      get '/api/categories', nil, version(1)
     end
 
     it "has a status code of 200" do
@@ -30,9 +30,7 @@ describe "RetrieveCategories" do
       @last_updated = Time.now.utc
       @category3 = create(:category)
 
-      get '/api/categories',
-        {last_updated: @last_updated},
-        {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      get '/api/categories', {last_updated: @last_updated}, version(1)
     end
 
     it "retrieves the categories created after Time.now" do

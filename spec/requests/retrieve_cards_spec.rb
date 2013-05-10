@@ -8,7 +8,7 @@ describe "RetrieveCards" do
   context "with no date specified" do
     before :each do
       @cards = [create(:card), create(:card)]
-      get '/api/cards', nil, {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      get '/api/cards', nil, version(1)
     end
 
     it "has a status code of 200" do
@@ -30,9 +30,7 @@ describe "RetrieveCards" do
       @last_updated = Time.now.utc
       @card3 = create(:card)
 
-      get '/api/cards',
-        {last_updated: @last_updated},
-        {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      get '/api/cards', {last_updated: @last_updated}, version(1)
     end
 
     it "retrieves the cards created after Time.now" do

@@ -9,8 +9,7 @@ describe "DeleteCategories" do
     end
 
     let(:delete_category) do
-      delete "/api/categories/#{@category2.id}", nil,
-        {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      delete "/api/categories/#{@category2.id}", nil, version(1)
     end
 
     it "has a status code of 200" do
@@ -30,8 +29,7 @@ describe "DeleteCategories" do
 
   context "trying to delete a non-existent category" do
     before :each do
-      delete '/api/categories/1', nil,
-        {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      delete '/api/categories/1', nil, version(1)
     end
 
     it "has a status code of 404" do

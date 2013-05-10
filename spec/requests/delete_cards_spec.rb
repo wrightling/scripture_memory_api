@@ -7,8 +7,7 @@ describe "DeleteCards" do
       @card2 = create(:card)
       @card3 = create(:card)
 
-      delete "/api/cards/#{@card2.id}", nil,
-        {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      delete "/api/cards/#{@card2.id}", nil, version(1)
     end
 
     it "has a status code of 200" do
@@ -26,8 +25,7 @@ describe "DeleteCards" do
 
   context "trying to delete a non-existent card" do
     before :each do
-      delete "/api/cards/1", nil,
-        {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      delete "/api/cards/1", nil, version(1)
     end
 
     it { response.response_code.should eql 404 }

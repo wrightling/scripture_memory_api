@@ -15,8 +15,7 @@ describe "EditCards" do
     end
 
     let(:edit_reference) { put "/api/cards/#{@card1.id}",
-                            @request_payload,
-                            {'HTTP_ACCEPT' => "application/smapi.v1"}}
+                            @request_payload, version(1) }
 
     it "has a status code of 200" do
       edit_reference
@@ -36,9 +35,7 @@ describe "EditCards" do
 
   context "trying to edit a non-existent card" do
     before :each do
-      put "/api/cards/1",
-        @request_payload,
-        {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      put "/api/cards/1", @request_payload, version(1)
     end
 
     it { response.response_code.should eql 404 }

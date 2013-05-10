@@ -6,8 +6,7 @@ describe "AddCards" do
   end
 
   before :each do
-    post '/api/cards', request_payload,
-      {'HTTP_ACCEPT' => 'application/smapi.v1'}
+    post '/api/cards', request_payload, version(1)
   end
 
   context "with a valid card" do
