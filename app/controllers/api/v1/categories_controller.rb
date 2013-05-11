@@ -10,7 +10,7 @@ module Api
       end
 
       def create
-        @category = Category.new(params["category"])
+        @category = Category.new(Array(params["categories"]).first)
 
         if @category.save
           render json: @category, root: "categories", status: :created
@@ -21,7 +21,7 @@ module Api
       end
 
       def update
-        @category.update_attributes(params["category"])
+        @category.update_attributes(Array(params["categories"]).first)
       end
 
       def destroy

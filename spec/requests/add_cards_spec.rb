@@ -11,11 +11,11 @@ describe "AddCards" do
 
   context "with a valid card" do
     let(:request_payload) do
-      { card: {
+      { cards: [{
           subject: 'some subject',
           reference: 'Rom 3:23',
           scripture: 'For all have sinned...'
-        }
+        }]
       }
     end
 
@@ -28,7 +28,7 @@ describe "AddCards" do
     end
 
     it "has expected values" do
-      Card.last.subject.should eql request_payload[:card][:subject]
+      Card.last.subject.should eql request_payload[:cards].first[:subject]
     end
 
     it "returns json containing the card" do
@@ -40,9 +40,9 @@ describe "AddCards" do
 
   context "without subject and reference" do
     let(:request_payload) do
-      { card: {
+      { cards: [{
           scripture: 'For all have sinned...'
-        }
+        }]
       }
     end
 

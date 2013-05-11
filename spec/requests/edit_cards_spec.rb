@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "EditCards" do
   before :each do
     @request_payload = {
-      card: {
+      cards: [{
         reference: 'John 5:24'
-      }
+      }]
     }
   end
 
@@ -29,7 +29,7 @@ describe "EditCards" do
     it "edits the reference to a new value" do
       expect { edit_reference }.to change {
         Card.find(@card1.id).reference
-      }.to(@request_payload[:card][:reference])
+      }.to(@request_payload[:cards].first[:reference])
     end
   end
 

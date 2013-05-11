@@ -10,7 +10,7 @@ module Api
       end
 
       def create
-        @card = Card.new(params["card"])
+        @card = Card.new(Array(params["cards"]).first)
 
         if @card.save
           render json: @card, root: "cards", status: :created
@@ -25,7 +25,7 @@ module Api
       end
 
       def update
-        @card.update_attributes(params["card"])
+        @card.update_attributes(Array(params["cards"]).first)
       end
 
       private

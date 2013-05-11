@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "EditCategories" do
   before :each do
     @request_payload = {
-      category: {
+      categories: [{
         name: 'new name'
-      }
+      }]
     }
   end
 
@@ -30,7 +30,7 @@ describe "EditCategories" do
     it "edits the :name to a new value" do
       expect { edit_category }.to change {
         Category.find(@category1.id).name
-      }.to(@request_payload[:category][:name])
+      }.to(@request_payload[:categories].first[:name])
     end
   end
 

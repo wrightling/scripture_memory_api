@@ -11,9 +11,9 @@ describe "AddCategories" do
 
   context "with a valid category" do
     let(:request_payload) do
-      { category: {
+      { categories: [{
           name: 'romans road'
-        }
+        }]
       }
     end
 
@@ -26,7 +26,7 @@ describe "AddCategories" do
     end
 
     it "adds a valid category with expected values" do
-      Category.last.name.should eql request_payload[:category][:name]
+      Category.last.name.should eql request_payload[:categories].first[:name]
     end
 
     it "returns json containing the category" do
@@ -38,7 +38,7 @@ describe "AddCategories" do
 
   context "without a name specified" do
     let(:request_payload) do
-      { category: {} }
+      { categories: [{}] }
     end
 
     it "has a status code of 422" do
