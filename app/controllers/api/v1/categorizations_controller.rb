@@ -7,15 +7,15 @@ module Api
         render json: @categorizations
       end
 
-      # def create
-      #   @categorization = Categorization.new(params[:categorization])
+      def create
+        @categorization = Categorization.new(Array(params[:categorizations]).first)
 
-      #   if @categorization.save
-      #     render json: @categorization, status: :created, location: @categorization
-      #   else
-      #     render json: @categorization.errors, status: :unprocessable_entity
-      #   end
-      # end
+        if @categorization.save
+          render json: @categorization, status: :created
+        else
+          render json: @categorization.errors, status: :unprocessable_entity
+        end
+      end
 
       # def update
       #   @categorization = Categorization.find(params[:id])
