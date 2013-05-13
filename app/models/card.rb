@@ -19,7 +19,7 @@ class Card < ActiveRecord::Base
 
   def at_least_one_subject_or_reference
     if String(subject).empty? && String(reference).empty?
-      errors[:handle] << "Please include a reference or subject"
+      errors[:base] << "Please include a reference or subject"
     end
   end
 end

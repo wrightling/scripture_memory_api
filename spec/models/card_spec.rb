@@ -6,7 +6,7 @@ describe Card do
   end
 
   it "is invalid if both reference and subject are missing" do
-    expect(build(:card, reference: nil, subject: nil)).to have(1).errors_on(:handle)
+    expect(build(:card, reference: nil, subject: nil)).to have(1).errors_on(:base)
   end
 
   context "card creation" do
