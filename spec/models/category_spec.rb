@@ -16,6 +16,25 @@ describe Category do
     it { should be_valid }
   end
 
+  context "category destruction with categorizations" do
+    let(:categorization) { create(:categorization) }
+    let(:destruction) { @category.destroy }
+
+    before :each do
+      @category = categorization.category
+    end
+
+    it "reduces the number of categorizations by 1" do
+      expect { destruction }.to change { Categorization.count }.from(1).to(0)
+    end
+
+    it "removes the previously created categorization" do
+      expect { destruction }.to change {
+        Categorization.exists?(categorization.id)
+      }.from(true).to(false)
+    end
+  end
+
   describe "#updated_since" do
     before :each do
       @category1 = create(:category)

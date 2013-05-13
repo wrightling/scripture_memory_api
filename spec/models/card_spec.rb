@@ -19,6 +19,25 @@ describe Card do
     it { should be_valid }
   end
 
+  context "card destruction with categorizations" do
+    let(:categorization) { create(:categorization) }
+    let(:destruction) { @card.destroy }
+
+    before :each do
+      @card = categorization.card
+    end
+
+    it "reduces the number of categorizations by 1" do
+      expect { destruction }.to change { Categorization.count }.from(1).to(0)
+    end
+
+    it "removes the previously created categorization" do
+      expect { destruction }.to change {
+        Categorization.exists?(categorization.id)
+      }.from(true).to(false)
+    end
+  end
+
   describe "#updated_since" do
     before :each do
       @card1 = create(:card)
