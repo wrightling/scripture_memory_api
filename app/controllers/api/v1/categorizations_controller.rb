@@ -11,7 +11,9 @@ module Api
         @categorization = Categorization.new(Array(params[:categorizations]).first)
 
         if @categorization.save
-          render json: @categorization, status: :created
+          render json: @categorization, root: "categorizations", status: :created
+        elsif Array(@categorization.errors[:base]).first =~ /link.*already exists/
+          render json: @categorization.errors, status: :conflict
         else
           render json: @categorization.errors, status: :unprocessable_entity
         end

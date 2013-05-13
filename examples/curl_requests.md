@@ -44,3 +44,7 @@ INDEX
 
     curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categorizations" -i
     curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categorizations?last_updated=2013-05-07" -i
+
+CREATE
+
+        curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"categorizations":[{"card_id":"1","category_id":"1"}]}' http://localhost:3000/api/categorizations -i
