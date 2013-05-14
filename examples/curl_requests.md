@@ -13,7 +13,7 @@ CREATE
 
 DELETE
 
-    curl -i -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -X DELETE http://localhost:3000/api/cards/1 -i
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -X DELETE http://localhost:3000/api/cards/1 -i
 
 EDIT
 
@@ -32,7 +32,7 @@ CREATE
 
 DELETE
 
-    curl -i -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -X DELETE http://localhost:3000/api/categories/1 -i
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -X DELETE http://localhost:3000/api/categories/1 -i
 
 EDIT
 
@@ -47,4 +47,8 @@ INDEX
 
 CREATE
 
-        curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"categorizations":[{"card_id":"1","category_id":"1"}]}' http://localhost:3000/api/categorizations -i
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"categorizations":[{"card_id":"1","category_id":"1"}]}' http://localhost:3000/api/categorizations -i
+
+DELETE
+
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -X DELETE http://localhost:3000/api/categorizations/1 -i
