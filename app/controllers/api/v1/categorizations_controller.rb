@@ -1,6 +1,8 @@
 module Api
   module V1
     class CategorizationsController < ApplicationController
+      before_filter :find_categorization, only: [:destroy]
+
       def index
         @categorizations = Categorization.updated_since(params[:last_updated])
 
@@ -19,22 +21,18 @@ module Api
         end
       end
 
-      # def update
-      #   @categorization = Categorization.find(params[:id])
+      def destroy
+        @categorization.destroy
+      end
 
-      #   if @categorization.update_attributes(params[:categorization])
-      #     head :no_content
-      #   else
-      #     render json: @categorization.errors, status: :unprocessable_entity
-      #   end
-      # end
+      private
 
-      # def destroy
-      #   @categorization = Categorization.find(params[:id])
-      #   @categorization.destroy
-
-      #   head :no_content
-      # end
+      def find_categorization
+        @categorization = Categorization.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        error = { error: "The categorization you were looking for could not be found" }
+        render json: error, status: 404
+      end
     end
   end
 end
