@@ -4,4 +4,4 @@ before_script:
 language: ruby
 rvm:
   - 2.0.0-p0
-script: bundle exec rspec spec
+script: "bundle exec rake db:migrate && bundle exec rspec spec"
