@@ -1,4 +1,5 @@
 before_script:
+  - "cp config/database.example.yml config/database.yml"
   - psql -c 'create database scripture_memory_api_test;' -U postgres
 language: ruby
 rvm:
