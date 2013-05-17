@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: scripture_memory_api_development
   pool: 5
-  username: warren
+  username: postgres
   password:
   min_messages: WARNING
 
@@ -12,7 +12,7 @@ test:
   encoding: unicode
   database: scripture_memory_api_test
   pool: 5
-  username: warren
+  username: postgres
   password:
   min_messages: WARNING
 
