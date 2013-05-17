@@ -10,7 +10,7 @@ module Api
       end
 
       def create
-        @card = Card.new(Array(params["cards"]).first)
+        @card = Card.new(card_params)
 
         if @card.save
           render json: @card, root: "cards", status: :created
@@ -25,7 +25,7 @@ module Api
       end
 
       def update
-        @card.update_attributes(Array(params["cards"]).first)
+        @card.update_attributes(card_params)
       end
 
       private
@@ -35,6 +35,11 @@ module Api
       rescue ActiveRecord::RecordNotFound
         error = { error: "The card you were looking for could not be found" }
         render json: error, status: 404
+      end
+
+      def card_params
+        # Only anticipating one card on create, at this point
+        Array(params.require(:cards)).first.permit(:subject, :reference, :scripture)
       end
     end
   end

@@ -4,6 +4,7 @@ gem 'rails', '3.2.13'
 
 gem 'rails-api'
 gem 'active_model_serializers'
+gem 'strong_parameters'
 
 gem 'pg'
 
