@@ -10,7 +10,7 @@ module Api
       end
 
       def create
-        @categorization = Categorization.new(Array(params[:categorizations]).first)
+        @categorization = Categorization.new(cat_params)
 
         if @categorization.save
           render json: @categorization, root: "categorizations", status: :created
@@ -32,6 +32,12 @@ module Api
       rescue ActiveRecord::RecordNotFound
         error = { error: "The categorization you were looking for could not be found" }
         render json: error, status: 404
+      end
+
+      def cat_params
+        # Hacking here because strong_parameters can't handle #require returning an array yet.
+        params_array = Array(params.require(:categorizations))
+        ActionController::Parameters.new(params_array.first).permit(:card_id, :category_id)
       end
     end
   end

@@ -38,7 +38,7 @@ describe "AddCategories" do
 
   context "without a name specified" do
     let(:request_payload) do
-      { categories: [{}] }
+      { categories: [{name: nil}] }
     end
 
     it "has a status code of 422" do

@@ -10,7 +10,7 @@ module Api
       end
 
       def create
-        @category = Category.new(Array(params["categories"]).first)
+        @category = Category.new(category_params)
 
         if @category.save
           render json: @category, root: "categories", status: :created
@@ -21,7 +21,7 @@ module Api
       end
 
       def update
-        @category.update_attributes(Array(params["categories"]).first)
+        @category.update_attributes(category_params)
       end
 
       def destroy
@@ -35,6 +35,12 @@ module Api
       rescue
         error = { error: 'The category you were looking for could not be found' }
         render json: error, status: 404
+      end
+
+      def category_params
+        # Hacking here because strong_parameters can't handle #require returning an array yet.
+        params_array = Array(params.require(:categories))
+        ActionController::Parameters.new(params_array.first).permit(:name)
       end
     end
   end
