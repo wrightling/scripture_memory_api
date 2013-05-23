@@ -1,0 +1,1 @@
+HOST = 'smapi.herokuapp.com'

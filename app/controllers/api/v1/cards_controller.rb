@@ -14,7 +14,7 @@ module Api
 
         if @card.save
           render json: @card, root: "cards", status: :created,
-            location: api_card_url(@card, host: 'smapi.herokuapp.com')
+            location: api_card_url(@card, host: HOST)
         else
           errors = { errors: @card.errors.full_messages }
           render json: errors, status: :unprocessable_entity
