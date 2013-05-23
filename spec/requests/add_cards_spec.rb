@@ -36,6 +36,12 @@ describe "AddCards" do
       json = card.active_model_serializer.new(card, @options).to_json
       expect(response.body).to eql json
     end
+
+    it "includes a location header in the response" do
+      card = Card.last
+      expect(response.header['Location']).to_not be_nil
+      expect(response.header['Location']).to include("/api/cards/#{card.id}")
+    end
   end
 
   context "without subject and reference" do
