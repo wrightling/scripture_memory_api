@@ -13,7 +13,8 @@ module Api
         @categorization = Categorization.new(cat_params)
 
         if @categorization.save
-          render json: @categorization, root: "categorizations", status: :created
+          render json: @categorization, root: "categorizations", status: :created,
+            location: api_categorization_url(@categorization, HOST)
         elsif Array(@categorization.errors[:base]).first =~ /link.*already exists/
           render json: @categorization.errors, status: :conflict
         else

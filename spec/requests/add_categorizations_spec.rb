@@ -38,6 +38,12 @@ describe "AddCategorizations" do
                                                         @options).to_json
       expect(response.body).to eql json
     end
+
+    it "includes a location header in the response" do
+      categorization = Categorization.last
+      expect(response.header['Location']).to_not be_nil
+      expect(response.header['Location']).to include("/api/categorizations/#{categorization.id}")
+    end
   end
 
   context "without a valid categorization" do

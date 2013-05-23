@@ -34,6 +34,12 @@ describe "AddCategories" do
       json = category.active_model_serializer.new(category, @options).to_json
       expect(response.body).to eql json
     end
+
+    it "includes a location header in the response" do
+      category = Category.last
+      expect(response.header['Location']).to_not be_nil
+      expect(response.header['Location']).to include("/api/categories/#{category.id}")
+    end
   end
 
   context "without a name specified" do
