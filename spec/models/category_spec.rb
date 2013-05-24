@@ -31,7 +31,7 @@ describe Category do
     it "removes the previously created categorization" do
       expect { destruction }.to change {
         Categorization.exists?(categorization.id)
-      }.from(true).to(false)
+      }.from("1").to(nil)
     end
   end
 

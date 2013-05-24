@@ -19,7 +19,7 @@ describe Card do
     it { should be_valid }
   end
 
-  context "card destruction with categorizations" do
+  context "destruction with categorizations" do
     let(:categorization) { create(:categorization) }
     let(:destruction) { @card.destroy }
 
@@ -34,7 +34,7 @@ describe Card do
     it "removes the previously created categorization" do
       expect { destruction }.to change {
         Categorization.exists?(categorization.id)
-      }.from(true).to(false)
+      }.from("1").to(nil)
     end
   end
 

@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.0.rc1'
 
 gem 'rails-api'
 gem 'active_model_serializers'
-gem 'strong_parameters'
 
 gem 'pg'
 

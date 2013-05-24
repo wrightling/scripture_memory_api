@@ -17,3 +17,4 @@
 # to avoid deprecation warning.
 # Can be safely removed in a rails3 api-only application.
 ScriptureMemoryApi::Application.config.secret_token = 'fc2527f2b13d1a67b34e935f6487190706cb38ff629629497253244c7b147647726920adc790d835117dbf29913680baad9092e4d3478d4b72be809e73772d2b'
+ScriptureMemoryApi::Application.config.secret_key_base = 'fc2527f2b13d1a67b34e935f6487190706cb38ff629629497253244c7b147647726920adc790d835117dbf29913680baad9092e4d3478d4b72be809e73772d2b'
