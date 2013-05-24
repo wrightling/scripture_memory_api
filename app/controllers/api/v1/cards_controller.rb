@@ -1,7 +1,11 @@
 module Api
   module V1
     class CardsController < ApplicationController
-      before_filter :find_card, only: [:destroy, :update]
+      before_filter :find_card, only: [:show, :destroy, :update]
+
+      def show
+        render json: @card, root: "cards"
+      end
 
       def index
         @cards = Card.updated_since(params[:last_updated])
