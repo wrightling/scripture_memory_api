@@ -2,6 +2,10 @@
 
 ### card requests
 
+SHOW
+
+    curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/cards/1" -i
+
 INDEX
 
     curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/cards" -i
@@ -21,6 +25,10 @@ EDIT
 
 ### category requests
 
+SHOW
+
+    curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categories/1" -i
+
 INDEX
 
     curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categories" -i
@@ -39,6 +47,10 @@ EDIT
     curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d '{"categories":[{"name":"balloons"}]}' http://localhost:3000/api/categories/1 -i
 
 ### categorization requests
+
+SHOW
+
+    curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/categorizations/1" -i
 
 INDEX
 
