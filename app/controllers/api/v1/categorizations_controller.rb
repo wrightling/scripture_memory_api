@@ -1,7 +1,11 @@
 module Api
   module V1
     class CategorizationsController < ApplicationController
-      before_filter :find_categorization, only: [:destroy]
+      before_filter :find_categorization, only: [:show, :destroy]
+
+      def show
+        render json: @categorization, root: "categorizations"
+      end
 
       def index
         @categorizations = Categorization.updated_since(params[:last_updated])

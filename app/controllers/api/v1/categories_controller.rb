@@ -1,7 +1,11 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
-      before_filter :find_category, only: [:update, :destroy]
+      before_filter :find_category, only: [:show, :update, :destroy]
+
+      def show
+        render json: @category, root: "categories"
+      end
 
       def index
         @categories = Category.updated_since(params[:last_updated])
