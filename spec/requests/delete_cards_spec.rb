@@ -10,8 +10,8 @@ describe "DeleteCards" do
       delete "/api/cards/#{@card2.id}", nil, version(1)
     end
 
-    it "has a status code of 200" do
-      response.response_code.should eql 200
+    it "has a status code of 204" do
+      response.response_code.should eql 204
     end
 
     it "decreases the number of cards" do

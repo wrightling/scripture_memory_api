@@ -28,6 +28,8 @@ module Api
 
       def destroy
         @categorization.destroy
+
+        head status: :no_content
       end
 
       private

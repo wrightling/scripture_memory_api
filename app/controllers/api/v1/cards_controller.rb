@@ -27,6 +27,8 @@ module Api
 
       def destroy
         @card.destroy
+
+        head status: :no_content
       end
 
       def update

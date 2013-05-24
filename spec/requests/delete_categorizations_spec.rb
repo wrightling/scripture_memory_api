@@ -10,9 +10,9 @@ describe "DeleteCategorizations" do
   let(:delete_cat) { delete "/api/categorizations/#{@cat2.id}", nil, version(1) }
 
   context "without errors" do
-    it "has a status code of 200" do
+    it "has a status code of 204" do
       delete_cat
-      response.response_code.should eql 200
+      response.response_code.should eql 204
     end
 
     it "decreases the number of categorizations" do
