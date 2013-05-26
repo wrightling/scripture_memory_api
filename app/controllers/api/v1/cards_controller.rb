@@ -48,7 +48,7 @@ module Api
         # Only anticipating one card on create, at this point
         # Hacking here because strong_parameters can't handle #require returning an array yet.
         params_array = Array(params.require(:cards))
-        ActionController::Parameters.new(params_array.first).permit(:subject, :reference, :scripture)
+        ActionController::Parameters.new(params_array.first).permit(:subject, :reference, :scripture, :translation)
       end
     end
   end

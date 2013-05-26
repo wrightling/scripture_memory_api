@@ -14,7 +14,8 @@ describe "AddCards" do
       { cards: [{
           subject: 'some subject',
           reference: 'Rom 3:23',
-          scripture: 'For all have sinned...'
+          scripture: 'For all have sinned...',
+          translation: 'NASB'
         }]
       }
     end
@@ -28,7 +29,9 @@ describe "AddCards" do
     end
 
     it "has expected values" do
-      Card.last.subject.should eql request_payload[:cards].first[:subject]
+      card = Card.last
+      card.subject.should eql request_payload[:cards].first[:subject]
+      card.translation.should eql request_payload[:cards].first[:translation]
     end
 
     it "returns json containing the card" do
