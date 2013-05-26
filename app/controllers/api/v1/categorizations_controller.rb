@@ -4,7 +4,7 @@ module Api
       before_filter :find_categorization, only: [:show, :destroy]
 
       def show
-        render json: @categorization, root: "categorizations"
+        render json: [@categorization], root: "categorizations"
       end
 
       def index

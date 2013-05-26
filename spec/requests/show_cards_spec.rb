@@ -17,7 +17,8 @@ describe "ShowCards" do
     end
 
     it "returns the requested card" do
-      json = card.active_model_serializer.new(card, @options).to_json
+      card_array = [card]
+      json = card_array.active_model_serializer.new(card_array, @options).to_json
       expect(response.body).to eql json
     end
   end

@@ -17,7 +17,8 @@ describe "ShowCategorizations" do
     end
 
     it "returns the requested categorization" do
-      json = cat.active_model_serializer.new(cat, @options).to_json
+      cat_array = [cat]
+      json = cat_array.active_model_serializer.new(cat_array, @options).to_json
       expect(response.body).to eql json
     end
   end

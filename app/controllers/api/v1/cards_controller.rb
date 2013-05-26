@@ -4,7 +4,7 @@ module Api
       before_filter :find_card, only: [:show, :destroy, :update]
 
       def show
-        render json: @card, root: "cards"
+        render json: [@card], root: "cards"
       end
 
       def index
