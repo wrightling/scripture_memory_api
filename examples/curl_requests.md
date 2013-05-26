@@ -13,7 +13,7 @@ INDEX
 
 CREATE
 
-    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"cards":[{"reference":"Rom 3:23","scripture":"For all have sinned and fall short of the glory of God."}]}' http://localhost:3000/api/cards -i
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"cards":[{"reference":"Rom 3:23","scripture":"For all have sinned and fall short of the glory of God.","translation":"NASB"}]}' http://localhost:3000/api/cards -i
 
 DELETE
 
