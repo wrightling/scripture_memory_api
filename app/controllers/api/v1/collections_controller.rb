@@ -1,7 +1,7 @@
 module Api
   module V1
     class CollectionsController < ApplicationController
-      before_filter :find_collection, only: [:show]
+      before_filter :find_collection, only: [:show, :destroy, :update]
 
       def show
         render json: [@collection], root: "collections"
@@ -23,6 +23,16 @@ module Api
           errors = { errors: @collection.errors.full_messages }
           render json: errors, status: :unprocessable_entity
         end
+      end
+
+      def destroy
+        @collection.delete
+
+        head status: :no_content
+      end
+
+      def update
+        @collection.update_attributes(collection_params)
       end
 
       private

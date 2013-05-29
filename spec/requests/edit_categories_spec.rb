@@ -14,9 +14,9 @@ describe "EditCategories" do
       @category1 = create(:category)
     end
 
-    let(:edit_category) { put "/api/categories/#{@category1.id}",
-                            @request_payload,
-                            {"HTTP_ACCEPT" => "application/smapi.v1"}}
+    let(:edit_category) do
+      put "/api/categories/#{@category1.id}", @request_payload, version(1)}
+    end
 
     it "has a status code of 200" do
       edit_category
@@ -36,9 +36,7 @@ describe "EditCategories" do
 
   context "trying to edit a non-existent category" do
     before :each do
-      put '/api/categories/1',
-        @request_payload,
-        {'HTTP_ACCEPT' => 'application/smapi.v1'}
+      put '/api/categories/1', @request_payload, version(1)
     end
 
     it { response.response_code.should eql 404 }
