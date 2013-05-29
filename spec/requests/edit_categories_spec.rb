@@ -15,7 +15,7 @@ describe "EditCategories" do
     end
 
     let(:edit_category) do
-      put "/api/categories/#{@category1.id}", @request_payload, version(1)}
+      put "/api/categories/#{@category1.id}", @request_payload, version(1)
     end
 
     it "has a status code of 200" do
