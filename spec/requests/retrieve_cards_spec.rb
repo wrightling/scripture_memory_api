@@ -33,7 +33,7 @@ describe "RetrieveCards" do
       get '/api/cards', {last_updated: @last_updated}, version(1)
     end
 
-    it "retrieves the cards created after Time.now" do
+    it "retrieves the cards updated after Time.now" do
       cards = [@card3]
       json = cards.active_model_serializer.new(cards, @options).to_json
       response.body.should eql json

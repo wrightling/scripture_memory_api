@@ -7,6 +7,12 @@ module Api
         render json: [@collection], root: "collections"
       end
 
+      def index
+        @collections = Collection.updated_since(params[:last_updated])
+
+        render json: @collections
+      end
+
       def create
         @collection = Collection.new(collection_params)
 

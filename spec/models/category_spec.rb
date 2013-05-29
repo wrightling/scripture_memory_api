@@ -52,7 +52,7 @@ describe Category do
                                                                @category2)
     end
 
-    it "does not include cards created before Time.now" do
+    it "does not include categories created before Time.now" do
       Category.updated_since(nil).should include(@category1, @category2, @category3)
     end
   end

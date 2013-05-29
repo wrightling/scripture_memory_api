@@ -33,7 +33,7 @@ describe "RetrieveCategories" do
       get '/api/categories', {last_updated: @last_updated}, version(1)
     end
 
-    it "retrieves the categories created after Time.now" do
+    it "retrieves the categories updated after Time.now" do
       categories = [@category3]
       json = categories.active_model_serializer.new(categories, @options).to_json
       response.body.should eql json

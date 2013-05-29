@@ -2,6 +2,12 @@
 
 FactoryGirl.define do
   factory :collection do
-    name "MyString"
+    sequence(:name) { |i| "collection#{i}" }
+
+    factory :old_collection do
+      old_time = 1.week.ago
+      created_at old_time
+      updated_at old_time
+    end
   end
 end
