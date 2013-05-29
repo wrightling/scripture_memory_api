@@ -64,3 +64,26 @@ CREATE
 DELETE
 
     curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -X DELETE http://localhost:3000/api/categorizations/1 -i
+
+### collection requests
+
+SHOW
+
+    curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/collections/1" -i
+
+INDEX
+
+    curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/collections" -i
+    curl -H "Accept: application/smapi.v1+json" "localhost:3000/api/collections?last_updated=2013-05-07" -i
+
+CREATE
+
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"collections":[{"name":"summer bible study"}]}' http://localhost:3000/api/collections -i
+
+DELETE
+
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -X DELETE http://localhost:3000/api/collections/1 -i
+
+EDIT
+
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d '{"collections":[{"name":"equipped disciple class"}]}' http://localhost:3000/api/collections/1 -i
