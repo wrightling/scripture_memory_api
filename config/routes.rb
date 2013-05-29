@@ -7,6 +7,7 @@ ScriptureMemoryApi::Application.routes.draw do
       resources :cards, only: [:show, :index, :create, :destroy, :update]
       resources :categories, only: [:show, :index, :create, :destroy, :update]
       resources :categorizations, only: [:show, :index, :create, :destroy]
+      resources :collections, only: [:show, :create]
     end
   end
 

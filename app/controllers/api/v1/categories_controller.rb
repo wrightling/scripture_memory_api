@@ -18,7 +18,7 @@ module Api
 
         if @category.save
           render json: @category, root: "categories", status: :created,
-            location: api_category_url(@category, HOST)
+            location: api_category_url(@category, host: HOST)
         else
           errors = { errors: @category.errors.full_messages }
           render json: errors, status: :unprocessable_entity
