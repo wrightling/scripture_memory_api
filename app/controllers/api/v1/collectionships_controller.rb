@@ -7,6 +7,12 @@ module Api
         render json: [@collectionship], root: "collectionships"
       end
 
+      def index
+        @collectionships = Collectionship.updated_since(params[:last_updated])
+
+        render json: @collectionships
+      end
+
       def create
         @collectionship = Collectionship.new(ship_params)
 
