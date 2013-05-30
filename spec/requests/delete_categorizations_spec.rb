@@ -19,7 +19,7 @@ describe "DeleteCategorizations" do
       expect { delete_cat }.to change { Categorization.count }.by(-1)
     end
 
-    it "removes the expected card" do
+    it "removes the expected categorization" do
       delete_cat
       Categorization.exists?(@cat2.id).should be_false
     end

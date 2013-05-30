@@ -20,6 +20,12 @@ module Api
         end
       end
 
+      def destroy
+        @collectionship.destroy
+
+        head status: :no_content
+      end
+
       private
 
       def find_collectionship
