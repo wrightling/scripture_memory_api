@@ -45,7 +45,7 @@ describe Collectionship do
   end
 
   context "#updated_since" do
-    before :all do
+    before :each do
       without_timestamping_of(Collectionship) do
         @ship1 = create(:old_collectionship)
         @ship2 = create(:old_collectionship)

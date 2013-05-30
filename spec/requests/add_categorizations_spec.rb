@@ -14,7 +14,7 @@ describe "AddCategorizations" do
   let(:card) { create(:card) }
   let(:category) { create(:category) }
 
-  context "with a valid cateogization" do
+  context "with a valid categorization" do
     subject { response }
 
     let(:request_payload) do

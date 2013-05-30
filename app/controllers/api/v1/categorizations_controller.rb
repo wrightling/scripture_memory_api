@@ -18,7 +18,7 @@ module Api
 
         if @categorization.save
           render json: @categorization, root: "categorizations", status: :created,
-            location: api_categorization_url(@categorization, HOST)
+            location: api_categorization_url(@categorization, host: HOST)
         elsif Array(@categorization.errors[:base]).first =~ /link.*already exists/
           render json: @categorization.errors, status: :conflict
         else
@@ -38,7 +38,7 @@ module Api
         @categorization = Categorization.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         error = { error: "The categorization you were looking for could not be found" }
-        render json: error, status: 404
+        render json: error, status: :not_found
       end
 
       def cat_params
