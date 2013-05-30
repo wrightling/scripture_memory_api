@@ -45,8 +45,25 @@ describe Collectionship do
   end
 
   context "#updated_since" do
-    it "includes collectionships updated after Time.now"
-    it "does not include the collectionships updated before Time.now"
-    it "includes all cards if no date is provided"
+    before :all do
+      without_timestamping_of(Collectionship) do
+        @ship1 = create(:old_collectionship)
+        @ship2 = create(:old_collectionship)
+      end
+      @last_updated = Time.now.utc
+      @ship3 = create(:collectionship)
+    end
+
+    it "includes collectionships updated after Time.now" do
+      Collectionship.updated_since(@last_updated).should include(@ship3)
+    end
+
+    it "does not include the collectionships updated before Time.now" do
+      Collectionship.updated_since(@last_updated).should_not include(@ship1, @ship2)
+    end
+
+    it "includes all cards if no date is provided" do
+      Collectionship.updated_since(nil).should include(@ship1, @ship2, @ship3)
+    end
   end
 end

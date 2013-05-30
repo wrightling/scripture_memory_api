@@ -10,6 +10,14 @@ class Collectionship < ActiveRecord::Base
   validate :unique_card_collection_combination,
     unless: "card_id.nil? or collection_id.nil?"
 
+  def self.updated_since(time)
+    if time
+      Collectionship.where("updated_at >= ?", time)
+    else
+      Collectionship.all
+    end
+  end
+
   private
 
   def references_an_existing_card
