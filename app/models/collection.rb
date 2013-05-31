@@ -1,4 +1,7 @@
 class Collection < ActiveRecord::Base
+  has_many :collectionships, dependent: :destroy
+  has_many :cards, through: :collectionships
+
   validates :name, presence: true
 
   def self.updated_since(time)

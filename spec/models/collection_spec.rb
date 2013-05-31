@@ -16,6 +16,25 @@ describe Collection do
     it { should be_valid }
   end
 
+  context "destruction with collections" do
+    let(:collectionship) { create(:collectionship) }
+    let(:destruction) { @collection.destroy }
+
+    before :each do
+      @collection = collectionship.collection
+    end
+
+    it "reduces the number of collectionships by 1" do
+      expect { destruction }.to change { Collectionship.count }.from(1).to(0)
+    end
+
+    it "removes the previously created collectionship" do
+      expect { destruction }.to change {
+        Collectionship.exists?(collectionship.id)
+      }.from("1").to(nil)
+    end
+  end
+
   describe "#updated_since" do
     before :each do
       @collection1 = create(:collection)

@@ -2,6 +2,9 @@ class Card < ActiveRecord::Base
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
 
+  has_many :collectionships, dependent: :destroy
+  has_many :collections, through: :collectionships
+
   validates :scripture, presence: true
   validate :at_least_one_subject_or_reference
 
