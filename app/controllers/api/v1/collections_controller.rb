@@ -32,7 +32,7 @@ module Api
       end
 
       def update
-        @collection.update_attributes(collection_params)
+        @collection.update(collection_params)
       end
 
       private

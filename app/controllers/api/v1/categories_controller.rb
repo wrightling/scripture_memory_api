@@ -26,7 +26,7 @@ module Api
       end
 
       def update
-        @category.update_attributes(category_params)
+        @category.update(category_params)
       end
 
       def destroy

@@ -32,7 +32,7 @@ module Api
       end
 
       def update
-        @card.update_attributes(card_params)
+        @card.update(card_params)
       end
 
       private
