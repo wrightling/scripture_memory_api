@@ -1,7 +1,7 @@
 module Api
   module V1
     class CollectionsController < ApplicationController
-      before_filter :find_collection, only: [:show, :destroy, :update]
+      before_action :find_collection, only: [:show, :destroy, :update]
 
       def show
         render json: [@collection], root: "collections"

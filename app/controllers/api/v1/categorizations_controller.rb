@@ -1,7 +1,7 @@
 module Api
   module V1
     class CategorizationsController < ApplicationController
-      before_filter :find_categorization, only: [:show, :destroy]
+      before_action :find_categorization, only: [:show, :destroy]
 
       def show
         render json: [@categorization], root: "categorizations"

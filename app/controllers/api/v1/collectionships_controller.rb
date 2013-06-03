@@ -1,7 +1,7 @@
 module Api
   module V1
     class CollectionshipsController < ApplicationController
-      before_filter :find_collectionship, only: [:show, :destroy]
+      before_action :find_collectionship, only: [:show, :destroy]
 
       def show
         render json: [@collectionship], root: "collectionships"
