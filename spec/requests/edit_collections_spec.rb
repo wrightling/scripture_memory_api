@@ -15,7 +15,7 @@ describe "EditCollections" do
     end
 
     let(:edit_collection) do
-      put "/api/collections/#{@collection1.id}", @request_payload, version(1)
+      patch "/api/collections/#{@collection1.id}", @request_payload, version(1)
     end
 
     it "has a status code of 200" do
@@ -36,7 +36,7 @@ describe "EditCollections" do
 
   context "trying to edit a non-existent collection" do
     before :each do
-      put '/api/collections/1', @request_payload, version(1)
+      patch '/api/collections/1', @request_payload, version(1)
     end
 
     it "has a status code of 404" do

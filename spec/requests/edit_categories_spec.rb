@@ -15,7 +15,7 @@ describe "EditCategories" do
     end
 
     let(:edit_category) do
-      put "/api/categories/#{@category1.id}", @request_payload, version(1)
+      patch "/api/categories/#{@category1.id}", @request_payload, version(1)
     end
 
     it "has a status code of 200" do
@@ -36,7 +36,7 @@ describe "EditCategories" do
 
   context "trying to edit a non-existent category" do
     before :each do
-      put '/api/categories/1', @request_payload, version(1)
+      patch '/api/categories/1', @request_payload, version(1)
     end
 
     it { response.response_code.should eql 404 }
