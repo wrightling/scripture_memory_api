@@ -21,7 +21,7 @@ DELETE
 
 EDIT
 
-    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d '{"cards":[{"reference":"Rom 6:23","scripture":"For the wages of sin is death"}]}' http://smapi.herokuapp.com/api/cards/1 -i
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X PATCH -d '{"cards":[{"reference":"Rom 6:23","scripture":"For the wages of sin is death"}]}' http://smapi.herokuapp.com/api/cards/1 -i
 
 ### category requests
 
@@ -44,7 +44,7 @@ DELETE
 
 EDIT
 
-    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d '{"categories":[{"name":"balloons"}]}' http://smapi.herokuapp.com/api/categories/1 -i
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X PATCH -d '{"categories":[{"name":"balloons"}]}' http://smapi.herokuapp.com/api/categories/1 -i
 
 ### categorization requests
 
@@ -86,7 +86,7 @@ DELETE
 
 EDIT
 
-    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d '{"collections":[{"name":"equipped disciple class"}]}' http://smapi.herokuapp.com/api/collections/1 -i
+    curl -H "Accept: application/smapi.v1+json" -H "Accept: application/json" -H "Content-type: application/json" -X PATCH -d '{"collections":[{"name":"equipped disciple class"}]}' http://smapi.herokuapp.com/api/collections/1 -i
 
 ### collectionship requests
 
