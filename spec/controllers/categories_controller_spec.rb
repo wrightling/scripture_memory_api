@@ -5,6 +5,71 @@ describe Api::V1::CategoriesController do
     @options = {scope: CategorySerializer, root: "categories"}
   end
 
+  describe "GET #show" do
+    before :each do
+      get :show, id: category.id
+    end
+
+    context "when the category is found" do
+      let(:category) { create(:category) }
+
+      it "has a status code of 200" do
+        expect(response.response_code).to eql 200
+      end
+
+      it "returns the requested category" do
+        category_array = [category]
+        json = category_array.active_model_serializer.new(category_array, @options).to_json
+        expect(response.body).to eql json
+      end
+    end
+
+    context "when the category is not found" do
+      let(:category) { double.tap { |dbl| dbl.stub(id: 1) } }
+
+      it "has a status code of 404" do
+        expect(response.response_code).to eql 404
+      end
+    end
+  end
+
+  describe "GET #index" do
+    context "with no date specified" do
+      before :each do
+        @categories = [create(:category), create(:category)]
+        get :index
+      end
+
+      it "has a status code of 200" do
+        response.response_code.should eql 200
+      end
+
+      it "retrieves all categories" do
+        json = @categories.active_model_serializer.new(@categories, @options).to_json
+        response.body.should eql json
+      end
+    end
+
+    context "with a date specified" do
+      before :each do
+        without_timestamping_of(Category) do
+          @category1 = create(:old_category)
+          @category2 = create(:old_category)
+        end
+        @last_updated = Time.now.utc
+        @category3 = create(:category)
+
+        get :index, last_updated: @last_updated
+      end
+
+      it "retrieves the categories updated after Time.now" do
+        categories = [@category3]
+        json = categories.active_model_serializer.new(categories, @options).to_json
+        response.body.should eql json
+      end
+    end
+  end
+
   describe "POST #create" do
     before :each do
       post :create, request_payload
@@ -149,79 +214,6 @@ describe Api::V1::CategoriesController do
       it "has an appropriate error message" do
         error = { error: 'The category you were looking for could not be found' }
         response.body.should eql error.to_json
-      end
-    end
-  end
-
-  describe "GET #index" do
-    before :all do
-      @options = {scope: CategorySerializer, root: "categories"}
-    end
-
-    context "with no date specified" do
-      before :each do
-        @categories = [create(:category), create(:category)]
-        get :index
-      end
-
-      it "has a status code of 200" do
-        response.response_code.should eql 200
-      end
-
-      it "retrieves all categories" do
-        json = @categories.active_model_serializer.new(@categories, @options).to_json
-        response.body.should eql json
-      end
-    end
-
-    context "with a date specified" do
-      before :each do
-        without_timestamping_of(Category) do
-          @category1 = create(:old_category)
-          @category2 = create(:old_category)
-        end
-        @last_updated = Time.now.utc
-        @category3 = create(:category)
-
-        get :index, last_updated: @last_updated
-      end
-
-      it "retrieves the categories updated after Time.now" do
-        categories = [@category3]
-        json = categories.active_model_serializer.new(categories, @options).to_json
-        response.body.should eql json
-      end
-    end
-  end
-
-  describe "GET #show" do
-    before :all do
-      @options = { scope: CategorySerializer, root: "categories" }
-    end
-
-    before :each do
-      get :show, id: category.id
-    end
-
-    context "when the category is found" do
-      let(:category) { create(:category) }
-
-      it "has a status code of 200" do
-        expect(response.response_code).to eql 200
-      end
-
-      it "returns the requested category" do
-        category_array = [category]
-        json = category_array.active_model_serializer.new(category_array, @options).to_json
-        expect(response.body).to eql json
-      end
-    end
-
-    context "when the category is not found" do
-      let(:category) { double.tap { |dbl| dbl.stub(id: 1) } }
-
-      it "has a status code of 404" do
-        expect(response.response_code).to eql 404
       end
     end
   end

@@ -5,6 +5,34 @@ describe Api::V1::CardsController do
     @options = {scope: CardSerializer, root: "cards"}
   end
 
+  describe "GET #show" do
+    before :each do
+      get :show, id: card.id
+    end
+
+    context "when the card is found" do
+      let(:card) { create(:card) }
+
+      it "has a status code of 200" do
+        expect(response.response_code).to eql 200
+      end
+
+      it "returns the requested card" do
+        card_array = [card]
+        json = card_array.active_model_serializer.new(card_array, @options).to_json
+        expect(response.body).to eql json
+      end
+    end
+
+    context "when the card is not found" do
+      let(:card) { double.tap { |dbl| dbl.stub(:id).and_return(1) } }
+
+      it "has a status code of 404" do
+        expect(response.response_code).to eql 404
+      end
+    end
+  end
+
   describe "GET #index" do
     context "with no date specified" do
       before :each do
@@ -38,34 +66,6 @@ describe Api::V1::CardsController do
         cards = [@card3]
         json = cards.active_model_serializer.new(cards, @options).to_json
         response.body.should eql json
-      end
-    end
-  end
-
-  describe "GET #show" do
-    before :each do
-      get :show, id: card.id
-    end
-
-    context "when the card is found" do
-      let(:card) { create(:card) }
-
-      it "has a status code of 200" do
-        expect(response.response_code).to eql 200
-      end
-
-      it "returns the requested card" do
-        card_array = [card]
-        json = card_array.active_model_serializer.new(card_array, @options).to_json
-        expect(response.body).to eql json
-      end
-    end
-
-    context "when the card is not found" do
-      let(:card) { double.tap { |dbl| dbl.stub(:id).and_return(1) } }
-
-      it "has a status code of 404" do
-        expect(response.response_code).to eql 404
       end
     end
   end
